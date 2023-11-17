@@ -90,12 +90,29 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+  
+  do {
+    var length = parseInt(prompt('Choose the length of your Password: type a number between 8 and 128 '));
+  
+    // Check if the input from the user is a number and if it is included in the range required
+    if (!isNaN(length) && length >= 8 && length <= 128) {
+      // The input is valid so we exit the loop and ask the Character types to be included in the password
+      break;
+    } else {
+      alert("Invalid input. Please enter a number between 8 and 128.");
+    }
+  } while (true);
+
+   var hasNumbers = confirm ('Do you want to include Numbers in your Password? ');
+   var hasCapital = confirm ('Do you want to include Capital Letters? ');
+   var hasLower = confirm ('Do you want to include Lower Case Letters? ');
+   var hasSpecialChar = confirm ('Do you want to include Special Characters? ');
 
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  var randomElement = math.floor(math.random());
 }
 
 // Function to generate password with user input
@@ -116,3 +133,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
+
+
+getPasswordOptions();
