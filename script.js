@@ -103,10 +103,28 @@ function getPasswordOptions() {
     }
   } while (true);
 
-   var hasNumbers = confirm ('Do you want to include Numbers in your Password? ');
-   var hasCapital = confirm ('Do you want to include Capital Letters? ');
-   var hasLower = confirm ('Do you want to include Lower Case Letters? ');
-   var hasSpecialChar = confirm ('Do you want to include Special Characters? ');
+
+  // Loop until the user selects at least one character type
+  do {
+    // Reset the value for each iteration
+    let hasAtLeastOneType = false;
+
+    // Inner loop until the user selects at least one character type
+    do {
+      var hasNumbers = confirm('Do you want to include Numbers in your Password? ');
+      var hasCapital = confirm('Do you want to include Capital Letters? ');
+      var hasLower = confirm('Do you want to include Lower Case Letters? ');
+      var hasSpecialChar = confirm('Do you want to include Special Characters? ');
+
+      // Check if at least one character type is selected
+      if (hasNumbers || hasCapital || hasLower || hasSpecialChar) {
+        hasAtLeastOneType = true;
+      } else {
+        alert("You must select at least one character type.");
+      }
+    } while (!hasAtLeastOneType);
+
+  } while (!hasAtLeastOneType);
 
 }
 
