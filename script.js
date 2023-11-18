@@ -89,10 +89,14 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
+
+let length;
+let hasNumbers, hasCapital, hasLower, hasSpecialChar;
+
 function getPasswordOptions() {
   
   do {
-    var length = parseInt(prompt('Choose the length of your Password: type a number between 8 and 128 '));
+    length = parseInt(prompt('Choose the length of your Password: type a number between 8 and 128 '));
   
     // Check if the input from the user is a number and if it is included in the range required
     if (!isNaN(length) && length >= 8 && length <= 128) {
@@ -111,10 +115,10 @@ function getPasswordOptions() {
 
     // Inner loop until the user selects at least one character type
     do {
-      var hasNumbers = confirm('Do you want to include Numbers in your Password? ');
-      var hasCapital = confirm('Do you want to include Capital Letters? ');
-      var hasLower = confirm('Do you want to include Lower Case Letters? ');
-      var hasSpecialChar = confirm('Do you want to include Special Characters? ');
+      hasNumbers = confirm('Do you want to include Numbers in your Password? ');
+      hasCapital = confirm('Do you want to include Capital Letters? ');
+      hasLower = confirm('Do you want to include Lower Case Letters? ');
+      hasSpecialChar = confirm('Do you want to include Special Characters? ');
 
       // Check if at least one character type is selected
       if (hasNumbers || hasCapital || hasLower || hasSpecialChar) {
@@ -178,3 +182,4 @@ generateBtn.addEventListener('click', writePassword);
 
 
 getPasswordOptions();
+writePassword();
