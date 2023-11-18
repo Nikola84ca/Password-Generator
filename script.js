@@ -88,7 +88,7 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// Function to prompt user for password options
+// Function to prompt user for password options, I declared the following variables with a global scope because I will need them in the generatePassword function too, as I need the length of the password and which type of characters the user decides to use. In these variables it is stored the user choice and it is fundamental to create the password in the next function.
 
 let length;
 let hasNumbers, hasCapital, hasLower, hasSpecialChar;
@@ -98,7 +98,7 @@ function getPasswordOptions() {
   do {
     length = parseInt(prompt('Choose the length of your Password: type a number between 8 and 128 '));
   
-    // Check if the input from the user is a number and if it is included in the range required
+    // This checks if the input from the user is a number and if it is included in the range required between 8 and 128, I decided to include 8 and 128 as valid numbers as well.
     if (!isNaN(length) && length >= 8 && length <= 128) {
       // The input is valid so we exit the loop and ask the Character types to be included in the password
       break;
