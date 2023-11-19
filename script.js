@@ -94,33 +94,35 @@ let length;
 let hasNumbers, hasCapital, hasLower, hasSpecialChar;
 
 function getPasswordOptions() {
+
   
   do {
     length = parseInt(prompt('Choose the length of your Password: type a number between 8 and 128 '));
   
     // This checks if the input from the user is a number and if it is included in the range required between 8 and 128, I decided to include 8 and 128 as valid numbers as well.
     if (!isNaN(length) && length >= 8 && length <= 128) {
-      // The input is valid so we exit the loop and ask the Character types to be included in the password
+      // If the above are true the user's input is valid so we exit the loop and ask the Character types to be included in the password, otherwise we alert that the input is invalid and we repeat the loop asking again for the length of the password. we exit this loop only whe the length is a number between 8 and 128.
       break;
     } else {
       alert("Invalid input. Please enter a number between 8 and 128.");
     }
   } while (true);
 
+  // When we exited the previous loop, so we have the correct length for the password we need to ask for at least one Character type among the 4 options of arrays we have. I decided to do a first do/while loop where the variable hasAtLeastOneType become true only when one of the global boolean variables hasNumbers, hasCapital, hasLower, or hasSpecialChar is true through the confirm.
 
-  // Loop until the user selects at least one character type
+  let hasAtLeastOneType= false;
+
   do {
-    // Reset the value for each iteration
-    let hasAtLeastOneType = false;
-
-    // Inner loop until the user selects at least one character type
+     // Inner loop until the user selects at least one character type
+    // I started with the variable as false so we keep looping until it is true
+       hasAtLeastOneType= false;
     do {
       hasNumbers = confirm('Do you want to include Numbers in your Password? ');
       hasCapital = confirm('Do you want to include Capital Letters? ');
       hasLower = confirm('Do you want to include Lower Case Letters? ');
       hasSpecialChar = confirm('Do you want to include Special Characters? ');
 
-      // Check if at least one character type is selected
+      // Here I check if at least one character type has been selected, then the variable hasAtLeastOneType becomes true and we can exit both loops, otherwise we alert the user to inform that at least one character type must be selected and we go back up in the loop representing all the confirms. We finish the loop only when at least one of the variables hasNumber, hasCapital, hasLower, or hasSpecialChar is true.
       if (hasNumbers || hasCapital || hasLower || hasSpecialChar) {
         hasAtLeastOneType = true;
       } else {
@@ -142,7 +144,7 @@ function getRandom(arr) {
 function generatePassword() {
   let tempPass = [];
 
-  // Loop until the password reaches the specified length
+  // Loop until the password reaches the length chosen by the user
   while (tempPass.length < length) {
     if (hasNumbers) {
       let randomNum = getRandom(numericCharacters);
@@ -162,8 +164,14 @@ function generatePassword() {
     }
   }
 
-  // Join the characters in the tempPass array and return the generated password
-  return tempPass.join('').slice(0, length);
+  // At this point I could have just returned the temp password using the join and slice metods, to turn it into a string of the length chosen by the user( return tempPass.join('').slice(0, length); ). The only issue with this tho, even if the password is functinal and consists of random elements from the character arrays is that the characters will always appear in the same order. If the user click the generate password button again, and if he chose lower cased characters, and special character, he will always have a random lower cased character as first character, followed by a random special character, then another random lower cased. Even if they are random, this alternance doen't provide a deep security level as the algorithm is following an evident pattern, so I decided to store the tempPass into the finalPassword variable, which will be shuffled once again giving every time random characters in random positions of the array.
+
+  // The following joins the characters in the tempPass array and slices it to the desired length before storing it in the finalPassword variable. Then finalPassword is shuffled using the Fisher-Yates algorithm. The three dots ... before finalPassword are the spread syntax, which is used to convert the string to an array temporarily for the purpose of shuffling.
+  
+  let finalPassword = tempPass.join('').slice(0, length);
+  finalPassword = [...finalPassword].sort(() => Math.random() - 0.5).join('');
+
+  return finalPassword;
 }
 
 // Get references to the #generate element
@@ -181,5 +189,6 @@ function writePassword() {
 generateBtn.addEventListener('click', writePassword);
 
 
+// Finally I run the function to get all the necesary input from the user, the user then will press the Generate Button on the web page to generate the password by calling the writePassword function, which calls the generatePassword function.
+
 getPasswordOptions();
-writePassword();
