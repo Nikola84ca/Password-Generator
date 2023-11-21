@@ -101,14 +101,14 @@ function getPasswordOptions() {
   
     // This checks if the input from the user is a number and if it is included in the range required between 8 and 128, I decided to include 8 and 128 as valid numbers as well.
     if (!isNaN(length) && length >= 8 && length <= 128) {
-      // If the above are true the user's input is valid so we exit the loop and ask the Character types to be included in the password, otherwise we alert that the input is invalid and we repeat the loop asking again for the length of the password. we exit this loop only whe the length is a number between 8 and 128.
+      // If the above are true the user's input is valid so we exit the loop and ask the Character types to be included in the password, otherwise we alert that the input is invalid and we repeat the loop asking again for the length of the password. We exit this loop only when the length is a number between 8 and 128.
       break;
     } else {
       alert("Invalid input. Please enter a number between 8 and 128.");
     }
   } while (true);
 
-  // When we exited the previous loop, we have the correct length for the password we need to ask for at least one Character type among the 4 options of arrays we have. I decided to do a first do/while loop where the variable hasAtLeastOneType become true only when one of the global boolean variables hasNumbers, hasCapital, hasLower, or hasSpecialChar is true through the confirm.
+  // When we exited the previous loop, we have the correct length for the password we need to ask for at least one Character type among the 4 options of arrays we have. I decided to do a first do/while loop where the variable hasAtLeastOneType becomes true only when one of the global boolean variables hasNumbers, hasCapital, hasLower, or hasSpecialChar is true through the confirm.
 
   let hasAtLeastOneType;
 
@@ -147,7 +147,7 @@ function getRandom(arr) {
 function generatePassword() {
   let tempPass = [];
 
-  // The following loop runs until the tempPass array reaches the length chosen by the user. At every loop, it checks if the four boolean variables hasNumbers, hasCapital etc are true or false. If they are true, it means the user wants to include that specific type of character so, with a getRandom function I temporary store the random character from that array inside randomNum, randomCapital etc and then I update the tempPass by adding those characters, one after the other in the temporary password array using the push metod. So, for example, if the user selects a length of 8 and chooses to include numbers and lowercase characters, an impotetical temporary password inside tempPass could look like this: 1a4h6j2t.
+  // The following loop runs until the tempPass array reaches the length chosen by the user. At every loop, it checks if the four boolean variables hasNumbers, hasCapital etc are true or false. If they are true, it means the user wants to include that specific type of character so, with a getRandom function I temporary store the random character from that array inside randomNum, randomCapital etc and then I update the tempPass by adding those characters, one after the other in the temporary password array using the push method. So, for example, if the user selects a length of 8 and chooses to include numbers and lowercase characters, an impotetical temporary password inside tempPass could look like this: 1a4h6j2t.
 
   while (tempPass.length < length) {
     if (hasNumbers) {
@@ -168,9 +168,9 @@ function generatePassword() {
     }
   }
 
-  // At this point I could have just returned the temp password using the join and slice metods, to turn it into a string of the length chosen by the user ( return tempPass.join('').slice(0, length); ). The only issue with this, even if the password is functinal and consists of random elements from the character arrays is that the characters will always appear in the same order, which is the order of the ifs in the loop above. This means that if the users click the generate password button again, and if they chose lowercase characters, and special character, they will always have a random lowercase character as first character, followed by a random special character, then another random lowercase and so on. Even if they are random, this alternance doen't provide a deep security level as the algorithm is following an evident pattern, so I decided to store the tempPass into the finalPassword variable, which will be shuffled once again giving every time random characters in random positions of the array.
+  // At this point I could have just returned the temp password using the join and slice methods, to turn it into a string of the length chosen by the user ( return tempPass.join('').slice(0, length); ). The only issue with this, even if the password is functinal and consists of random elements from the character arrays is that the characters will always appear in the same order, which is the order of the ifs in the loop above. This means that if the users click the generate password button again, and if they chose lowercase characters, and special character, they will always have a random lowercase character as first character, followed by a random special character, then another random lowercase and so on. Even if they are random, this alternance doen't provide a deep security level as the algorithm is following an evident pattern, so I decided to store the tempPass into the finalPassword variable, which will be shuffled once again giving every time random characters in random positions of the array.
 
-  // The following joins the characters in the tempPass array and slices it to the desired length before storing it in the finalPassword variable. Then finalPassword is shuffled using the Fisher-Yates algorithm. The three dots ... before finalPassword are the spread syntax, which is used to convert the string to an array temporarily for the purpose of shuffling.
+  // The following joins the characters in the tempPass array and slices it to the desired length before storing it in the finalPassword variable. Then finalPassword is shuffled using the sort metod and Math.random. The three dots ... before finalPassword are the spread syntax, which is used to convert the string to an array temporarily for the purpose of shuffling.
   
   let finalPassword = tempPass.join('').slice(0, length);
   finalPassword = [...finalPassword].sort(() => Math.random() - 0.5).join('');
