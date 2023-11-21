@@ -88,7 +88,9 @@ let hasNumbers, hasCapital, hasLower, hasSpecialChar;
     }
   } while (true);
 ```  
-* This "if" checks makes sure that the input from the user is a number and if it is included in the range required between 8 and 128, I decided to include 8 and 128 as valid numbers as well. If the conditions above in the "if" are true the user's input is valid so we exit the loop and ask the Character types to be included in the password, otherwise we alert that the input is invalid and we repeat the loop asking again for the length of the password. We'll break the loop only when the length is a number between 8 and 128.
+* This "if" checks makes sure that the input from the user is a number and if it is included in the range required between 8 and 128, I decided to include 8 and 128 as valid numbers as well. If the conditions above in the "if" are true the user's input is valid so we exit the loop and ask the Character types to be included in the password, otherwise we alert that the input is invalid and we repeat the loop asking again for the length of the password. We'll break the loop only when the length is a number between 8 and 128. Here is an example of this part of the function when the user inserts an invalid input: 
+
+![Gif animation of invalid length input](/assets/Images/password-generator-invalid-input.gif)
 
 * Once obtained the length, the function needs to make sure the user selects at least one of the character types stored in our arrays, so with anoter do/while loop the function presents a series of confirm prompts that ask the user the input for every character type, looping until at least one type is chosen. Here is the code:
 
@@ -113,7 +115,9 @@ let hasAtLeastOneType;
   } while (!hasAtLeastOneType);
 
 ```
-* I decided to do a first do/while loop where the variable hasAtLeastOneType become true only when one of the global boolean variables hasNumbers, hasCapital, hasLower, or hasSpecialChar is true through the confirm. I initialized it as false to run the outer loop and looped it until, one of the conditions of the "if" was true. The function checks if at least one character type has been selected, then the variable hasAtLeastOneType becomes true and we can exit both loops, otherwise we alert the user to inform that at least one character type must be selected and we go back up in the loop representing all the confirms. We finish the loop only when at least one of the variables hasNumber, hasCapital, hasLower, or hasSpecialChar is true.
+* I decided to do a first do/while loop where the variable hasAtLeastOneType become true only when one of the global boolean variables hasNumbers, hasCapital, hasLower, or hasSpecialChar is true through the confirm. I initialized it as false to run the outer loop and looped it until, one of the conditions of the "if" was true. The function checks if at least one character type has been selected, then the variable hasAtLeastOneType becomes true and we can exit both loops, otherwise we alert the user to inform that at least one character type must be selected and we go back up in the loop representing all the confirms. We finish the loop only when at least one of the variables hasNumber, hasCapital, hasLower, or hasSpecialChar is true. Here is an example of this part of the function in case the user doesn't select a character type:
+
+![Gif animation of invalid character type choice](/assets/Images/password-generator-type-choice.gif)
 
 
 * The second function is a short one but fundamental for the whole success of this project. It is the getRandom function, a general but effective code that selects a random element from an array and returns it to the variable speficied in another function.
