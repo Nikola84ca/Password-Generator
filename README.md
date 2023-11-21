@@ -88,7 +88,7 @@ let hasNumbers, hasCapital, hasLower, hasSpecialChar;
     }
   } while (true);
 ```  
-* This "if" checks makes sure that the input from the user is a number and if it is included in the range required between 8 and 128, I decided to include 8 and 128 as valid numbers as well. If the conditions above in the "if" are true the user's input is valid so we exit the loop and ask the Character types to be included in the password, otherwise we alert that the input is invalid and we repeat the loop asking again for the length of the password. We'll break the loop only when the length is a number between 8 and 128. Here is an example of this part of the function when the user inserts an invalid input: 
+* This "if" makes sure that the input from the user is a number and if it is included in the range required between 8 and 128, I decided to include 8 and 128 as valid numbers as well. If the conditions above in the "if" are true the user's input is valid so we exit the loop and ask the Character types to be included in the password, otherwise we alert that the input is invalid and we repeat the loop asking again for the length of the password. We'll break the loop only when the length is a number between 8 and 128. Here is an example of this part of the function when the user inserts an invalid input: 
 
 ![Gif animation of invalid length input](/assets/Images/password-generator-invalid-input.gif)
 
